@@ -28,7 +28,6 @@ export class UserService {
 
     const hash = await this.encryptPassword(payload.password, 10);
 
-    console.log(payload.password);
 
     payload.password = hash;
 
