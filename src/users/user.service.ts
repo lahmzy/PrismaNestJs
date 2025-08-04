@@ -67,7 +67,8 @@ export class UserService {
     const token = await this.jwtService.signAsync(
       {
         email:user.email,
-        id:user.id
+        id:user.id,
+        role:user.role
       },
       {
         expiresIn: '1d'

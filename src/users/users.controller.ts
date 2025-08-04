@@ -3,6 +3,10 @@ import { CreateUserDto } from './create-user-dto';
 import { UserService } from './user.service';
 import { LoginDto } from './login-dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { Role } from 'src/roles/roles.enum';
+import { Roles } from 'src/roles/roles.decorator';
+import { RolesGuard } from 'src/roles/roles.guard';
+
 
 @Controller('users')
 export class UsersController {
@@ -10,7 +14,8 @@ export class UsersController {
   constructor(private userService:UserService){}
 
 
-  @UseGuards(JwtAuthGuard)
+  @Roles([Role.ADMIN,Role.USER])
+  @UseGuards(JwtAuthGuard,RolesGuard)
   @Get('/profile')
 
   async getProfile(@Req() req){
